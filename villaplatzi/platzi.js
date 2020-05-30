@@ -51,28 +51,45 @@ function dibujar(x, y){
     }
     if (cerdo.cargaOk){
         papel.drawImage(cerdo.imagen, x, y);
+        console.log("La posición en X es " + x);
+        console.log("La posición en Y es " + y);
     }
 }
 
 function moverCerdo(evento){
     var movimiento = 10;
-    switch (evento.keyCode) {
-        case teclas.LEFT:
-            dibujar(x - movimiento, y);
+    if (x < 420 && y < 420 && x > 0 && y > 0){
+        switch (evento.keyCode) {
+            case teclas.LEFT:
+                dibujar(x - movimiento, y);
+                x = x - movimiento;
+                break;
+            case teclas.UP:
+                dibujar(x, y - movimiento);
+                y = y - movimiento;
+                break;
+            case teclas.RIGHT:
+                dibujar(x + movimiento, y);
+                x = x + movimiento;
+                break;
+            case teclas.DOWN:
+                dibujar(x, y + movimiento);
+                y = y + movimiento;
+                break;
+        }
+    } else {
+        if (x >= 420){
             x = x - movimiento;
-            break;
-        case teclas.UP:
-            dibujar(x, y - movimiento);
-            x = y - movimiento;
-            break;
-        case teclas.RIGHT:
-            dibujar(x + movimiento, y);
+        }
+        if (x <= 0){
             x = x + movimiento;
-            break;
-        case teclas.DOWN:
-            dibujar(x, y + movimiento);
+        }
+        if (y >= 420){
+            y = y - movimiento;
+        }
+        if (y <= 0){
             y = y + movimiento;
-            break;
+        }
     }
 }
 
